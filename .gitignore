@@ -30,3 +30,8 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+
+# dependency
+/node_modules
+/.pnp
+.pnp.js
