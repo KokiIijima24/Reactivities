@@ -39,5 +39,17 @@ namespace API.Controllers
         {
             return await _meditator.Send(command);
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Unit>> Edit(Edit.Command command)
+        {
+            return await _meditator.Send(command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Unit>> Delete(Guid Id)
+        {
+            return await _meditator.Send(new Delete.Command{Id = Id});
+        }
     }
 }
