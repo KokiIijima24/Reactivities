@@ -33,5 +33,11 @@ namespace API.Controllers
         {
             return await _meditator.Send(new Detail.Query { Id = id });
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Unit>> Create(Create.Command command)
+        {
+            return await _meditator.Send(command);
+        }
     }
 }
