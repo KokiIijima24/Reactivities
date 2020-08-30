@@ -27,6 +27,7 @@ namespace Application.Activities
                     throw new Exception("Could not find activity");
                 }
 
+                _context.Activities.Remove(activity);
                 var success = await _context.SaveChangesAsync() > 0;
 
                 if (success) return Unit.Value;
