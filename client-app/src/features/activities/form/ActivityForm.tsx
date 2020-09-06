@@ -1,20 +1,23 @@
 import React, { useState, FormEvent } from 'react'
 import { Form, Button, Segment } from 'semantic-ui-react'
 import { IActivity } from '../../../app/layout/models/activity'
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
+import { observer } from 'mobx-react-lite'
 
 interface IProps {
   setEditMdoe: (editMode: boolean) => void;
   activity: IActivity;
   createActivity: (activity: IActivity) => void;
   editActivity: (activity: IActivity) => void;
+  submitting: boolean
 }
 
-export const ActivityForm: React.FC<IProps> = ({ 
-  setEditMdoe, 
+const ActivityForm: React.FC<IProps> = ({
+  setEditMdoe,
   activity: initialFormState,
   createActivity,
-  editActivity
+  editActivity,
+  submitting
 }) => {
 
   const initializeForm = () => {
@@ -38,7 +41,7 @@ export const ActivityForm: React.FC<IProps> = ({
 
   const handleSubmit = () => {
     console.log(activity);
-    if(activity.id.length === 0){
+    if (activity.id.length === 0) {
       let newActivity = {
         ...activity,
         id: uuid()
@@ -91,6 +94,7 @@ export const ActivityForm: React.FC<IProps> = ({
           placeholder="Venue"
           value={activity.venue} />
         <Button
+          loading={submitting}
           floated='right'
           type='submit'
           content='Submit' />
@@ -103,3 +107,5 @@ export const ActivityForm: React.FC<IProps> = ({
     </Segment>
   )
 }
+
+export default observer(ActivityForm);
